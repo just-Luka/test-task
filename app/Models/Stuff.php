@@ -31,8 +31,6 @@ class Stuff extends Model
 
     public static function getByBranchId($id)
     {
-        return Stuff::where('branch_id', $id)->with(['occupation' => function($query) {
-            $query->orderByDesc('name');
-        }])->get();;
+        return Stuff::where('branch_id', $id)->with('occupation')->orderBy('name')->get();;
     }
 }
