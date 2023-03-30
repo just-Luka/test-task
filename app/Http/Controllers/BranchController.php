@@ -58,7 +58,7 @@ class BranchController extends Controller
 
         $branch = Branch::findOrFail($request->get('branch_id'));
         $stuff = Stuff::getByBranchId($request->get('branch_id'));
-        // dd($stuff);
+        
         return response()->json([$branch, $stuff]);
     }
 }

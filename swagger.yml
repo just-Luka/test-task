@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: TASK by Luka
+  description: "Documentation for the task"
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: info.tsiklauri@gmail.com
+  version: 1.0.0
+servers:
+  - url: localhost
+tags:
+  - name: branch
+    description: Everything about your Pets
+  - name: stuff
+    description: Manage Stuff
+paths:
+  /branches:
+    get:
+      tags:
+        - branch
+      summary: Get the current branches
+      operationId: readBranches
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+        '204':
+          description: No content available
+  /branch:
+    get:
+      tags:
+        - branch
+      summary: Get the branch
+      operationId: concreteBranch
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchConcrete'
+        '422':
+          description: Validation error
+  /branch/create:
+    post:
+      tags:
+        - branch
+      summary: Create new branch
+      operationId: createBranch
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BranchCreate'
+                  
+        '422':
+          description: Validation error
+          
+  /stuff/assign_branch:
+    get:
+      tags:
+        - stuff
+      summary: Assing stuff to branch
+      operationId: assignStuff
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: branch_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: "Branch is assigend successfully"
+                    data:
+                      type: boolean
+                      example: true
+        '422':
+          description: Validation error
+components:
+  schemas:
+    Branch:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 2
+        name:
+          type: string
+          example: "Branch 1"
+        created_at:
+          type: string
+          example: "2023-03-30T13:44:25.000000Z"
+        updated_at:
+          type: string
+          example: "2023-03-30T13:44:47.000000Z"
+    BranchConcrete:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 2
+        name:
+          type: string
+          example: "Branch 1"
+        created_at:
+          type: string
+          example: "2023-03-30T13:44:25.000000Z"
+        updated_at:
+          type: string
+          example: "2023-03-30T13:44:47.000000Z"
+        array:
+          type: array
+          items:
+            type: object
+    BranchCreate:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Branch created successfully"
+        data:
+          type: object
