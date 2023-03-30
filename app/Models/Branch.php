@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Branch extends Model
@@ -16,12 +15,12 @@ class Branch extends Model
     ];
     
     /**
-     * stuff
+     * staff
      *
      * @return HasOne
      */
-    public function stuff(): HasOne
+    public function staff(): HasOne
     {
-        return $this->HasOne(Stuff::class);
+        return $this->HasOne(Staff::class);
     }
 }

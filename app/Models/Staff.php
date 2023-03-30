@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
 
-class Stuff extends Model
+class Staff extends Model
 {
+    protected $table = 'staffs';
+    
     use HasFactory;
 
     protected $fillable = [
@@ -48,6 +50,6 @@ class Stuff extends Model
      */
     public static function getByBranchId($id): Collection
     {
-        return Stuff::where('branch_id', $id)->with('occupation')->orderBy('name')->get();
+        return Staff::where('branch_id', $id)->with('occupation')->orderBy('name')->get();
     }
 }

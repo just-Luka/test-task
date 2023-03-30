@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
-use App\Models\Stuff;
+use App\Models\Staff;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Validator;
@@ -23,7 +23,7 @@ class BranchController extends Controller
     }
    
     /**
-     * Get concrete branch and all stuff assigend to that branch 
+     * Get concrete branch and all staff assigend to that branch 
      *
      * @param  mixed $request
      * @return JsonResponse
@@ -39,9 +39,9 @@ class BranchController extends Controller
         }
 
         $branch = Branch::findOrFail($request->get('branch_id'));
-        $stuff = Stuff::getByBranchId($request->get('branch_id'));
+        $staff = Staff::getByBranchId($request->get('branch_id'));
 
-        return response()->json([$branch, $stuff]);
+        return response()->json([$branch, $staff]);
     }
 
     /**

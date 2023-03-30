@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Stuff;
+use App\Models\Staff;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Validator;
 
-class StuffController extends Controller
+class StaffController extends Controller
 {
       
     /**
-     * Assign stuff to specific branch
+     * Assign staff to specific branch
      *
      * @param  mixed $request
      * @return JsonResponse
@@ -19,7 +19,7 @@ class StuffController extends Controller
     public function assignBranch(Request $request): JsonResponse
     {
         $validation = Validator::make($request->all(), [
-            'user_id' => 'required|exists:stuffs,id',
+            'staff_id' => 'required|exists:staffs,id',
             'branch_id' => 'required|exists:branches,id',
         ]);
 
@@ -27,13 +27,13 @@ class StuffController extends Controller
             return response()->json(['error' => $validation->errors()], 422);
         }
 
-        $stuff = Stuff::find($request->get('user_id'))->update([
+        $staff = Staff::find($request->get('staff_id'))->update([
             'branch_id' => $request->get('branch_id'),
         ]);
 
         return response()->json([
             'message' => 'Branch is assigend successfully',
-            'data' => $stuff,
+            'data' => $staff,
         ]);
     }
 }

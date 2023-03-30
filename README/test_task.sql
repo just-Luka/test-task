@@ -64,7 +64,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (2, '2023_03_30_122045_create_branches_table', 1),
 (3, '2023_03_30_122124_create_occupations_table', 1),
-(4, '2023_03_30_122803_create_stuffs_table', 1);
+(4, '2023_03_30_122803_create_staffs_table', 1);
 
 -- --------------------------------------------------------
 
@@ -111,10 +111,10 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stuffs`
+-- Table structure for table `staffs`
 --
 
-CREATE TABLE `stuffs` (
+CREATE TABLE `staffs` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -127,10 +127,10 @@ CREATE TABLE `stuffs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `stuffs`
+-- Dumping data for table `staffs`
 --
 
-INSERT INTO `stuffs` (`id`, `name`, `email`, `age`, `phone_number`, `branch_id`, `occupation_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `staffs` (`id`, `name`, `email`, `age`, `phone_number`, `branch_id`, `occupation_id`, `created_at`, `updated_at`) VALUES
 (1, 'Nellie Carroll', 'emurphy@example.com', 65, '1-978-894-9941', 1, 1, '2023-03-30 12:17:36', '2023-03-30 12:17:36'),
 (2, 'Prof. Derick Gaylord', 'yessenia09@example.com', 59, '+1-832-572-7580', 2, 1, '2023-03-30 12:17:36', '2023-03-30 12:17:36'),
 (3, 'Kristina Bechtelar', 'jammie60@example.org', 39, '331-285-8888', 3, 2, '2023-03-30 12:17:36', '2023-03-30 12:17:36'),
@@ -167,13 +167,13 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `stuffs`
+-- Indexes for table `staffs`
 --
-ALTER TABLE `stuffs`
+ALTER TABLE `staffs`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `stuffs_email_unique` (`email`),
-  ADD KEY `stuffs_branch_id_foreign` (`branch_id`),
-  ADD KEY `stuffs_occupation_id_foreign` (`occupation_id`);
+  ADD UNIQUE KEY `staffs_email_unique` (`email`),
+  ADD KEY `staffs_branch_id_foreign` (`branch_id`),
+  ADD KEY `staffs_occupation_id_foreign` (`occupation_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -204,9 +204,9 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `stuffs`
+-- AUTO_INCREMENT for table `staffs`
 --
-ALTER TABLE `stuffs`
+ALTER TABLE `staffs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
@@ -214,11 +214,11 @@ ALTER TABLE `stuffs`
 --
 
 --
--- Constraints for table `stuffs`
+-- Constraints for table `staffs`
 --
-ALTER TABLE `stuffs`
-  ADD CONSTRAINT `stuffs_branch_id_foreign` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `stuffs_occupation_id_foreign` FOREIGN KEY (`occupation_id`) REFERENCES `occupations` (`id`) ON DELETE SET NULL;
+ALTER TABLE `staffs`
+  ADD CONSTRAINT `staffs_branch_id_foreign` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `staffs_occupation_id_foreign` FOREIGN KEY (`occupation_id`) REFERENCES `occupations` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

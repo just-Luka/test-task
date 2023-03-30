@@ -15,12 +15,12 @@ class Occupation extends Model
     ];
     
     /**
-     * stuff
+     * staff
      *
      * @return HasOne
      */
-    public function stuff(): HasOne
+    public function staff(): HasOne
     {
-        return $this->HasOne(Stuff::class);
+        return $this->HasOne(Staff::class);
     }
 }

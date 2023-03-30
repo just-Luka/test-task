@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Branch;
-use App\Models\Occupation;
-use App\Models\Stuff;
+
+use App\Models\Staff;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +18,6 @@ class DatabaseSeeder extends Seeder
 
         // Occupation::factory(4)->create();
 
-        Stuff::factory(4)->create();
+        Staff::factory(4)->create();
     }
 }

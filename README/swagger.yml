@@ -11,8 +11,8 @@ servers:
 tags:
   - name: branch
     description: Everything about your Pets
-  - name: stuff
-    description: Manage Stuff
+  - name: staff
+    description: Manage Staff
 paths:
   /branches:
     get:
@@ -70,12 +70,12 @@ paths:
         '422':
           description: Validation error
           
-  /stuff/assign_branch:
+  /staff/assign_branch:
     get:
       tags:
-        - stuff
-      summary: Assing stuff to branch
-      operationId: assignStuff
+        - staff
+      summary: Assing staff to branch
+      operationId: assignStaff
       parameters:
         - name: user_id
           in: query

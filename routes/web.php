@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BranchController;
-use App\Http\Controllers\StuffController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +29,6 @@ Route::controller(BranchController::class)->group(function () {
 });
 
 /**
- * Stuff's actions
+ * Staff's actions
  */
-Route::post('stuff/assign_branch', [StuffController::class, 'assignBranch'])->name('set_stuff_branch');
+Route::post('staff/assign_branch', [StaffController::class, 'assignBranch'])->name('set_staff_branch');
