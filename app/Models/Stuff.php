@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Collection;
 
 class Stuff extends Model
 {
@@ -43,10 +44,10 @@ class Stuff extends Model
      * getByBranchId
      *
      * @param  mixed $id
-     * @return void
+     * @return Collection
      */
-    public static function getByBranchId($id)
+    public static function getByBranchId($id): Collection
     {
-        return Stuff::where('branch_id', $id)->with('occupation')->orderBy('name')->get();;
+        return Stuff::where('branch_id', $id)->with('occupation')->orderBy('name')->get();
     }
 }
