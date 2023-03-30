@@ -18,17 +18,33 @@ class Stuff extends Model
         'branch_id',
         'occupation_id',
     ];
-
+    
+    /**
+     * occupation
+     *
+     * @return BelongsTo
+     */
     public function occupation(): BelongsTo
     {
         return $this->BelongsTo(Occupation::class);
     }
-
+    
+    /**
+     * branch
+     *
+     * @return BelongsTo
+     */
     public function branch(): BelongsTo
     {
         return $this->BelongsTo(Branch::class);
     }
-
+        
+    /**
+     * getByBranchId
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public static function getByBranchId($id)
     {
         return Stuff::where('branch_id', $id)->with('occupation')->orderBy('name')->get();;

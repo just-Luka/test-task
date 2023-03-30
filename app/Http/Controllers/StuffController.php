@@ -9,8 +9,12 @@ use Validator;
 
 class StuffController extends Controller
 {
+      
     /**
-     * Assign Stuff to branch
+     * Assign stuff to specific branch
+     *
+     * @param  mixed $request
+     * @return JsonResponse
      */
     public function assignBranch(Request $request): JsonResponse
     {

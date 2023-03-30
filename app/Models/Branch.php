@@ -14,7 +14,12 @@ class Branch extends Model
     protected $fillable = [
         'name',
     ];
-
+    
+    /**
+     * stuff
+     *
+     * @return HasOne
+     */
     public function stuff(): HasOne
     {
         return $this->HasOne(Stuff::class);

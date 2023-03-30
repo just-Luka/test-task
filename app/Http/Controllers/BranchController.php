@@ -9,9 +9,46 @@ use Illuminate\Http\Request;
 use Validator;
 
 class BranchController extends Controller
-{
+{       
+    /**
+     * Get all branch
+     *
+     * @return JsonResponse
+     */
+    public function read(): JsonResponse
+    {
+        $data = Branch::all();
+
+        return $data->isEmpty() ? response()->json(['error' => "there is nothing to see"], 204) : response()->json($data, 200);
+    }
+   
+    /**
+     * Get concrete branch and all stuff assigend to that branch 
+     *
+     * @param  mixed $request
+     * @return JsonResponse
+     */
+    public function readDetails(Request $request): JsonResponse
+    {
+        $validation = Validator::make($request->all(), [
+            'branch_id' => 'required|exists:branches,id'
+        ]);
+
+        if ($validation->fails()) {
+            return response()->json(['error' => $validation->errors()], 422);
+        }
+
+        $branch = Branch::findOrFail($request->get('branch_id'));
+        $stuff = Stuff::getByBranchId($request->get('branch_id'));
+
+        return response()->json([$branch, $stuff]);
+    }
+
     /**
      * Create new branch
+     *
+     * @param  mixed $request
+     * @return JsonResponse
      */
     public function create(Request $request): JsonResponse
     {
@@ -19,7 +56,7 @@ class BranchController extends Controller
             'name' => 'required|string|max:255'
         ]);
 
-        if($validation->fails()) {
+        if ($validation->fails()) {
             return response()->json(['error' => $validation->errors()], 422);
         }
 
@@ -31,34 +68,5 @@ class BranchController extends Controller
             'message' => 'Branch created successfully',
             'data' => $branch,
         ]);
-    }
-    
-    /**
-     * Read available branches
-     */
-    public function read(Request $request): JsonResponse
-    {
-        $data = Branch::all();
-        
-        return $data->isEmpty() ? response()->json(['error' => "there is nothing to see"], 204) : response()->json($data, 200);
-    }
-
-    /**
-     * Read branch by ID and get people who belongs to concrete branch
-     */
-    public function readDetails(Request $request): JsonResponse
-    {
-        $validation = Validator::make($request->all(), [
-            'branch_id' => 'required|exists:branches,id'
-        ]);
-
-        if($validation->fails()) {
-            return response()->json(['error' => $validation->errors()], 422);
-        }
-
-        $branch = Branch::findOrFail($request->get('branch_id'));
-        $stuff = Stuff::getByBranchId($request->get('branch_id'));
-        
-        return response()->json([$branch, $stuff]);
     }
 }
